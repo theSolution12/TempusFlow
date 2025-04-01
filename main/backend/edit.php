@@ -340,16 +340,16 @@ if (!$note) {
         </button>
         
         <!-- Rewrite Button -->
-        <button id="rewrite-btn" type="button" class="sidebar-btn bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg transition-colors duration-200 shadow-md mb-4 w-16 flex flex-col items-center" title="Rewrite your note content in a different style">
+        <!-- <button id="rewrite-btn" type="button" class="sidebar-btn bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg transition-colors duration-200 shadow-md mb-4 w-16 flex flex-col items-center" title="Rewrite your note content in a different style">
             <i class="fas fa-sync-alt mb-1 text-sm"></i>
             <span class="text-xs">Rewrite</span>
-        </button>
+        </button> -->
         
         <!-- Essay Generator Button -->
-        <button id="essay-btn" type="button" class="sidebar-btn bg-purple-500 hover:bg-purple-600 text-white p-2 rounded-lg transition-colors duration-200 shadow-md w-16 flex flex-col items-center" title="Generate a 300-word essay based on your title">
+        <!-- <button id="essay-btn" type="button" class="sidebar-btn bg-purple-500 hover:bg-purple-600 text-white p-2 rounded-lg transition-colors duration-200 shadow-md w-16 flex flex-col items-center" title="Generate a 300-word essay based on your title">
             <i class="fas fa-pen-fancy mb-1 text-sm"></i>
             <span class="text-xs">Essay</span>
-        </button>
+        </button> -->
     </div>
 
     <script>
@@ -589,256 +589,256 @@ if (!$note) {
         });
         
         // Essay generation functionality using Gemini
-        document.getElementById('essay-btn').addEventListener('click', function() {
-            const title = document.getElementById('title').value;
+        // document.getElementById('essay-btn').addEventListener('click', function() {
+        //     const title = document.getElementById('title').value;
             
-            if (title.trim().length < 3) {
-                alert('Please enter a more descriptive title to generate an essay.');
-                return;
-            }
+        //     if (title.trim().length < 3) {
+        //         alert('Please enter a more descriptive title to generate an essay.');
+        //         return;
+        //     }
             
-            // Change button state to loading
-            const essayBtn = this;
-            const originalBtnText = essayBtn.innerHTML;
-            essayBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            essayBtn.disabled = true;
+        //     // Change button state to loading
+        //     const essayBtn = this;
+        //     const originalBtnText = essayBtn.innerHTML;
+        //     essayBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        //     essayBtn.disabled = true;
             
-            // Send request to essay.php
-            const formData = new FormData();
-            formData.append('title', title);
+        //     // Send request to essay.php
+        //     const formData = new FormData();
+        //     formData.append('title', title);
             
-            fetch('essay.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.error) {
-                    throw new Error(data.error);
-                }
+        //     fetch('essay.php', {
+        //         method: 'POST',
+        //         body: formData
+        //     })
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw new Error('Network response was not ok');
+        //         }
+        //         return response.json();
+        //     })
+        //     .then(data => {
+        //         if (data.error) {
+        //             throw new Error(data.error);
+        //         }
                 
-                // Create modal to display essay
-                const modal = document.createElement('div');
-                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-                modal.innerHTML = `
-                    <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Generated Essay</h3>
-                            <button id="close-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="prose dark:prose-invert max-w-none">
-                            ${data.essay.replace(/\n/g, '<br>')}
-                        </div>
-                        <div class="mt-6 flex justify-end space-x-2">
-                            <button id="replace-with-essay" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">
-                                Replace
-                            </button>
-                            <button id="append-essay" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-                                Append to Note
-                            </button>
-                            <button id="close-modal-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                `;
+        //         // Create modal to display essay
+        //         const modal = document.createElement('div');
+        //         modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        //         modal.innerHTML = `
+        //             <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+        //                 <div class="flex justify-between items-center mb-4">
+        //                     <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Generated Essay</h3>
+        //                     <button id="close-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
+        //                         <i class="fas fa-times"></i>
+        //                     </button>
+        //                 </div>
+        //                 <div class="prose dark:prose-invert max-w-none">
+        //                     ${data.essay.replace(/\n/g, '<br>')}
+        //                 </div>
+        //                 <div class="mt-6 flex justify-end space-x-2">
+        //                     <button id="replace-with-essay" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">
+        //                         Replace
+        //                     </button>
+        //                     <button id="append-essay" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+        //                         Append to Note
+        //                     </button>
+        //                     <button id="close-modal-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+        //                         Close
+        //                     </button>
+        //                 </div>
+        //             </div>
+        //         `;
                 
-                document.body.appendChild(modal);
+        //         document.body.appendChild(modal);
                 
-                // Handle close modal
-                const closeModal = () => {
-                    document.body.removeChild(modal);
-                };
+        //         // Handle close modal
+        //         const closeModal = () => {
+        //             document.body.removeChild(modal);
+        //         };
                 
-                document.getElementById('close-modal').addEventListener('click', closeModal);
-                document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+        //         document.getElementById('close-modal').addEventListener('click', closeModal);
+        //         document.getElementById('close-modal-btn').addEventListener('click', closeModal);
                 
-                // Handle append essay
-                document.getElementById('append-essay').addEventListener('click', () => {
-                    const textarea = document.getElementById('content');
-                    textarea.value += '\n\n## Generated Essay\n' + data.essay;
-                    textarea.style.height = (textarea.scrollHeight) + 'px';
-                    closeModal();
-                });
+        //         // Handle append essay
+        //         document.getElementById('append-essay').addEventListener('click', () => {
+        //             const textarea = document.getElementById('content');
+        //             textarea.value += '\n\n## Generated Essay\n' + data.essay;
+        //             textarea.style.height = (textarea.scrollHeight) + 'px';
+        //             closeModal();
+        //         });
                 
-                // Handle replace with essay
-                document.getElementById('replace-with-essay').addEventListener('click', () => {
-                    if (confirm('Are you sure you want to replace the entire content with the generated essay?')) {
-                        const textarea = document.getElementById('content');
-                        textarea.value = '## Generated Essay\n' + data.essay;
-                        textarea.style.height = (textarea.scrollHeight) + 'px';
-                        closeModal();
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to generate essay: ' + error.message);
-            })
-            .finally(() => {
-                // Reset button state
-                essayBtn.innerHTML = originalBtnText;
-                essayBtn.disabled = false;
-            });
-        });
+        //         // Handle replace with essay
+        //         document.getElementById('replace-with-essay').addEventListener('click', () => {
+        //             if (confirm('Are you sure you want to replace the entire content with the generated essay?')) {
+        //                 const textarea = document.getElementById('content');
+        //                 textarea.value = '## Generated Essay\n' + data.essay;
+        //                 textarea.style.height = (textarea.scrollHeight) + 'px';
+        //                 closeModal();
+        //             }
+        //         });
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error);
+        //         alert('Failed to generate essay: ' + error.message);
+        //     })
+        //     .finally(() => {
+        //         // Reset button state
+        //         essayBtn.innerHTML = originalBtnText;
+        //         essayBtn.disabled = false;
+        //     });
+        // });
 
-        // Rewrite functionality using Gemini
-        document.getElementById('rewrite-btn').addEventListener('click', function() {
-            const content = document.getElementById('content').value;
+        // // Rewrite functionality using Gemini
+        // document.getElementById('rewrite-btn').addEventListener('click', function() {
+        //     const content = document.getElementById('content').value;
             
-            if (content.trim().length < 50) {
-                alert('Please enter more content to rewrite (at least 50 characters).');
-                return;
-            }
+        //     if (content.trim().length < 50) {
+        //         alert('Please enter more content to rewrite (at least 50 characters).');
+        //         return;
+        //     }
             
-            // Change button state to loading
-            const rewriteBtn = this;
-            const originalBtnText = rewriteBtn.innerHTML;
-            rewriteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            rewriteBtn.disabled = true;
+        //     // Change button state to loading
+        //     const rewriteBtn = this;
+        //     const originalBtnText = rewriteBtn.innerHTML;
+        //     rewriteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        //     rewriteBtn.disabled = true;
             
-            // Create style selection modal
-            const styleModal = document.createElement('div');
-            styleModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            styleModal.innerHTML = `
-                <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Choose Rewrite Style</h3>
-                        <button id="close-style-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="space-y-4">
-                        <button data-style="professional" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
-                            <span class="font-bold">Professional</span>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Formal language suitable for business or academic contexts</p>
-                        </button>
-                        <button data-style="creative" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
-                            <span class="font-bold">Creative</span>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Engaging and imaginative with colorful language</p>
-                        </button>
-                        <button data-style="simple" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
-                            <span class="font-bold">Simple</span>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Clear and easy to understand with simpler vocabulary</p>
-                        </button>
-                        <button data-style="persuasive" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
-                            <span class="font-bold">Persuasive</span>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Convincing language designed to influence the reader</p>
-                        </button>
-                    </div>
-                </div>
-            `;
+        //     // Create style selection modal
+        //     const styleModal = document.createElement('div');
+        //     styleModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        //     styleModal.innerHTML = `
+        //         <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full">
+        //             <div class="flex justify-between items-center mb-4">
+        //                 <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Choose Rewrite Style</h3>
+        //                 <button id="close-style-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
+        //                     <i class="fas fa-times"></i>
+        //                 </button>
+        //             </div>
+        //             <div class="space-y-4">
+        //                 <button data-style="professional" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
+        //                     <span class="font-bold">Professional</span>
+        //                     <p class="text-sm text-gray-600 dark:text-gray-400">Formal language suitable for business or academic contexts</p>
+        //                 </button>
+        //                 <button data-style="creative" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
+        //                     <span class="font-bold">Creative</span>
+        //                     <p class="text-sm text-gray-600 dark:text-gray-400">Engaging and imaginative with colorful language</p>
+        //                 </button>
+        //                 <button data-style="simple" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
+        //                     <span class="font-bold">Simple</span>
+        //                     <p class="text-sm text-gray-600 dark:text-gray-400">Clear and easy to understand with simpler vocabulary</p>
+        //                 </button>
+        //                 <button data-style="persuasive" class="style-btn w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white p-3 rounded-lg text-left">
+        //                     <span class="font-bold">Persuasive</span>
+        //                     <p class="text-sm text-gray-600 dark:text-gray-400">Convincing language designed to influence the reader</p>
+        //                 </button>
+        //             </div>
+        //         </div>
+        //     `;
             
-            document.body.appendChild(styleModal);
+        //     document.body.appendChild(styleModal);
             
-            // Handle close modal
-            document.getElementById('close-style-modal').addEventListener('click', function() {
-                document.body.removeChild(styleModal);
-                rewriteBtn.innerHTML = originalBtnText;
-                rewriteBtn.disabled = false;
-            });
+        //     // Handle close modal
+        //     document.getElementById('close-style-modal').addEventListener('click', function() {
+        //         document.body.removeChild(styleModal);
+        //         rewriteBtn.innerHTML = originalBtnText;
+        //         rewriteBtn.disabled = false;
+        //     });
             
-            // Handle style selection
-            document.querySelectorAll('.style-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const selectedStyle = this.getAttribute('data-style');
-                    document.body.removeChild(styleModal);
+        //     // Handle style selection
+        //     document.querySelectorAll('.style-btn').forEach(button => {
+        //         button.addEventListener('click', function() {
+        //             const selectedStyle = this.getAttribute('data-style');
+        //             document.body.removeChild(styleModal);
                     
-                    // Send request to rewrite.php
-                    const formData = new FormData();
-                    formData.append('content', content);
-                    formData.append('style', selectedStyle);
+        //             // Send request to rewrite.php
+        //             const formData = new FormData();
+        //             formData.append('content', content);
+        //             formData.append('style', selectedStyle);
                     
-                    fetch('rewrite.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.error) {
-                            throw new Error(data.error);
-                        }
+        //             fetch('rewrite.php', {
+        //                 method: 'POST',
+        //                 body: formData
+        //             })
+        //             .then(response => {
+        //                 if (!response.ok) {
+        //                     throw new Error('Network response was not ok');
+        //                 }
+        //                 return response.json();
+        //             })
+        //             .then(data => {
+        //                 if (data.error) {
+        //                     throw new Error(data.error);
+        //                 }
                         
-                        // Create modal to display rewritten content
-                        const resultModal = document.createElement('div');
-                        resultModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-                        resultModal.innerHTML = `
-                            <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-                                <div class="flex justify-between items-center mb-4">
-                                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Rewritten Content (${selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1)} Style)</h3>
-                                    <button id="close-result-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <div class="prose dark:prose-invert max-w-none">
-                                    ${data.rewritten.replace(/\n/g, '<br>')}
-                                </div>
-                                <div class="mt-6 flex justify-end space-x-2">
-                                    <button id="replace-with-rewrite" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">
-                                        Replace
-                                    </button>
-                                    <button id="append-rewrite" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-                                        Append to Note
-                                    </button>
-                                    <button id="close-result-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                        `;
+        //                 // Create modal to display rewritten content
+        //                 const resultModal = document.createElement('div');
+        //                 resultModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        //                 resultModal.innerHTML = `
+        //                     <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+        //                         <div class="flex justify-between items-center mb-4">
+        //                             <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Rewritten Content (${selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1)} Style)</h3>
+        //                             <button id="close-result-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
+        //                                 <i class="fas fa-times"></i>
+        //                             </button>
+        //                         </div>
+        //                         <div class="prose dark:prose-invert max-w-none">
+        //                             ${data.rewritten.replace(/\n/g, '<br>')}
+        //                         </div>
+        //                         <div class="mt-6 flex justify-end space-x-2">
+        //                             <button id="replace-with-rewrite" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">
+        //                                 Replace
+        //                             </button>
+        //                             <button id="append-rewrite" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+        //                                 Append to Note
+        //                             </button>
+        //                             <button id="close-result-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+        //                                 Close
+        //                             </button>
+        //                         </div>
+        //                     </div>
+        //                 `;
                         
-                        document.body.appendChild(resultModal);
+        //                 document.body.appendChild(resultModal);
                         
-                        // Handle close modal
-                        const closeResultModal = () => {
-                            document.body.removeChild(resultModal);
-                        };
+        //                 // Handle close modal
+        //                 const closeResultModal = () => {
+        //                     document.body.removeChild(resultModal);
+        //                 };
                         
-                        document.getElementById('close-result-modal').addEventListener('click', closeResultModal);
-                        document.getElementById('close-result-btn').addEventListener('click', closeResultModal);
+        //                 document.getElementById('close-result-modal').addEventListener('click', closeResultModal);
+        //                 document.getElementById('close-result-btn').addEventListener('click', closeResultModal);
                         
-                        // Handle append rewrite
-                        document.getElementById('append-rewrite').addEventListener('click', () => {
-                            const textarea = document.getElementById('content');
-                            textarea.value += '\n\n## Rewritten Content (' + selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1) + ' Style)\n' + data.rewritten;
-                            textarea.style.height = (textarea.scrollHeight) + 'px';
-                            closeResultModal();
-                        });
+        //                 // Handle append rewrite
+        //                 document.getElementById('append-rewrite').addEventListener('click', () => {
+        //                     const textarea = document.getElementById('content');
+        //                     textarea.value += '\n\n## Rewritten Content (' + selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1) + ' Style)\n' + data.rewritten;
+        //                     textarea.style.height = (textarea.scrollHeight) + 'px';
+        //                     closeResultModal();
+        //                 });
                         
-                        // Handle replace with rewrite
-                        document.getElementById('replace-with-rewrite').addEventListener('click', () => {
-                            if (confirm('Are you sure you want to replace the entire content with the rewritten version?')) {
-                                const textarea = document.getElementById('content');
-                                textarea.value = data.rewritten;
-                                textarea.style.height = (textarea.scrollHeight) + 'px';
-                                closeResultModal();
-                            }
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Failed to rewrite content: ' + error.message);
-                    })
-                    .finally(() => {
-                        // Reset button state
-                        rewriteBtn.innerHTML = originalBtnText;
-                        rewriteBtn.disabled = false;
-                    });
-                });
-            });
-        });
+        //                 // Handle replace with rewrite
+        //                 document.getElementById('replace-with-rewrite').addEventListener('click', () => {
+        //                     if (confirm('Are you sure you want to replace the entire content with the rewritten version?')) {
+        //                         const textarea = document.getElementById('content');
+        //                         textarea.value = data.rewritten;
+        //                         textarea.style.height = (textarea.scrollHeight) + 'px';
+        //                         closeResultModal();
+        //                     }
+        //                 });
+        //             })
+        //             .catch(error => {
+        //                 console.error('Error:', error);
+        //                 alert('Failed to rewrite content: ' + error.message);
+        //             })
+        //             .finally(() => {
+        //                 // Reset button state
+        //                 rewriteBtn.innerHTML = originalBtnText;
+        //                 rewriteBtn.disabled = false;
+        //             });
+        //         });
+        //     });
+        // });
     </script>
 </body>
 </html>
