@@ -5,9 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "notesdb"; // Change to your database name
+$database = "notesdb";
 
-// Connect to MySQL
 $conn = new mysqli($servername, $username, $password, $database);
 
 // Check connection

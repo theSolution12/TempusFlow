@@ -18,29 +18,29 @@ $email = trim($_POST['email']);
 $pass = trim($_POST['password']);
 $confirmPass = trim($_POST['confirmPassword']);
 
-if (empty($email) || empty($pass) || empty($confirmPass || empty($userName))) {
-    $_SESSION['error'] = "All fields are required!";
-    header("location: ../register.php");
-    exit();
-}
+// if (empty($email) || empty($pass) || empty($confirmPass || empty($userName))) {
+//     $_SESSION['error'] = "All fields are required!";
+//     header("location: ../register.php");
+//     exit();
+// }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $_SESSION['error'] = "Invalid email format!";
-    header("location: ../register.php");
-    exit();
-}
+// if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//     $_SESSION['error'] = "Invalid email format!";
+//     header("location: ../register.php");
+//     exit();
+// }
 
-if ($pass !== $confirmPass) {
-    $_SESSION['error'] = "Passwords do not match!";
-    header("location: ../register.php");
-    exit();
-}
+// if ($pass !== $confirmPass) {
+//     $_SESSION['error'] = "Passwords do not match!";
+//     header("location: ../register.php");
+//     exit();
+// }
 
-if (strlen($pass) < 6) {
-    $_SESSION['error'] = "Password must be at least 6 characters!";
-    header("location: ../register.php");
-    exit();
-}
+// if (strlen($pass) < 8) {
+//     $_SESSION['error'] = "Password must be at least 8 characters!";
+//     header("location: ../register.php");
+//     exit();
+// }
 
 // Hash the password before storing
 $hashedPass = password_hash($pass, PASSWORD_BCRYPT);

@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-[url(../assets/OIP.jpg)] bg-cover bg-center h-screen flex items-center justify-center">
+<body class="bg-[url(../assets/login-bg.png)] bg-cover bg-center h-screen flex items-center justify-center">
     <form method="post" action="./backend/register.php" class="backdrop-blur-md p-6 rounded shadow-md w-full max-w-sm"
         onsubmit="return validateForm()">
         <h2 class="text-2xl text-white text-center font-bold mb-4">Register Yourself</h2>
@@ -25,29 +25,29 @@
 
 
         <div class="mb-4">
-            <label class="text-white text-sm font-bold mb-2" for="username">Username</label>
-            <input class="shadow border rounded w-full py-2 px-3 text-white bg-gray-800" id="username" name="username"
+            <label class="text-white text-sm font-bold mb-2 ml-4" for="username">Username</label>
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="username" name="username"
                 type="text" placeholder="Enter your username">
             <p id="userNameError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 
         <div class="mb-4">
-            <label class="text-white text-sm font-bold mb-2" for="email">Email</label>
-            <input class="shadow border rounded w-full py-2 px-3 text-white bg-gray-800" id="email" name="email"
+            <label class="text-white text-sm font-bold mb-2 ml-4" for="email">Email</label>
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="email" name="email"
                 type="email" placeholder="Enter your email">
             <p id="emailError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 
         <div class="mb-4">
-            <label class="text-white text-sm font-bold mb-2" for="password">Password</label>
-            <input class="shadow border rounded w-full py-2 px-3 text-white bg-gray-800" id="password" name="password"
+            <label class="text-white text-sm font-bold mb-2 ml-4" for="password">Password</label>
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="password" name="password"
                 type="password" placeholder="Enter your password">
             <p id="passwordError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 
         <div class="mb-4">
-            <label class="text-white text-sm font-bold mb-2" for="confirmPassword">Confirm Password</label>
-            <input class="shadow border rounded w-full py-2 px-3 text-white bg-gray-800" name="confirmPassword"
+            <label class="text-white text-sm font-bold mb-2 ml-4" for="confirmPassword">Confirm Password</label>
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" name="confirmPassword"
                 id="confirmPassword" type="password" placeholder="Enter your password again">
             <p id="confirmPasswordError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
@@ -58,7 +58,7 @@
         </div>
 
         <div class="w-full flex items-center justify-center">
-            <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+            <input class="bg-white hover:bg-gray-200 font-semibold py-3 px-3 w-full rounded-full cursor-pointer"
                 type="submit" value="Submit">
         </div>
     </form>
@@ -71,6 +71,8 @@
             let emailError = document.getElementById("emailError");
             let passwordError = document.getElementById("passwordError");
             let confirmPasswordError = document.getElementById("confirmPasswordError");
+            let userName = document.getElementById("username").value.trim();
+            let userNameError = document.getElementById("userNameError");
             let isValid = true;
 
             // Reset error messages
@@ -80,6 +82,8 @@
             passwordError.classList.add("hidden");
             confirmPasswordError.innerText = "";
             confirmPasswordError.classList.add("hidden");
+            userNameError.innerText = "";
+            userNameError.classList.add("hidden");
 
             // Email validation
             if (email === "") {
@@ -97,8 +101,8 @@
                 passwordError.innerText = "Password is required!";
                 passwordError.classList.remove("hidden");
                 isValid = false;
-            } else if (password.length < 6) {
-                passwordError.innerText = "Password must be at least 6 characters!";
+            } else if (password.length < 8) {
+                passwordError.innerText = "Password must be at least 8 characters!";
                 passwordError.classList.remove("hidden");
                 isValid = false;
             }
@@ -111,6 +115,17 @@
             } else if (confirmPassword !== password) {
                 confirmPasswordError.innerText = "Passwords do not match!";
                 confirmPasswordError.classList.remove("hidden");
+                isValid = false;
+            }
+
+            // Username validation
+            if (userName === "") {
+                userNameError.innerText = "Username is required!";
+                userNameError.classList.remove("hidden");
+                isValid = false;
+            } else if (userName.length < 3) {
+                userNameError.innerText = "Username must be at least 3 characters!";
+                userNameError.classList.remove("hidden");
                 isValid = false;
             }
 
