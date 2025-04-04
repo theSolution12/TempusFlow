@@ -41,7 +41,7 @@ $token = $_GET['token']; // Extract token from URL
             <div class="mb-4">
                 <label class="text-white text-sm font-bold mb-2 ml-4" for="password">Password</label>
                 <input
-                    class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white"
+                    class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none"
                     id="password" name="password" type="password" placeholder="Enter your password">
                 <p id="passwordError" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
@@ -49,7 +49,7 @@ $token = $_GET['token']; // Extract token from URL
             <div class="mb-4">
                 <label class="text-white text-sm font-bold mb-2 ml-4" for="confirmPassword">Confirm Password</label>
                 <input
-                    class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white"
+                    class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none"
                     name="confirmPassword" id="confirmPassword" type="password" placeholder="Enter your password again">
                 <p id="confirmPasswordError" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>

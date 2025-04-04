@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Form with Validation</title>
+    <title>Register</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="bg-[url(../assets/login-bg.png)] bg-cover bg-center h-screen flex items-center justify-center">
-    <form method="post" action="./backend/register.php" class="backdrop-blur-md p-6 rounded shadow-md w-full max-w-sm"
+    <form method="post" action="./backend/register.php" class="backdrop-blur-md p-6 rounded-xl shadow-md w-full max-w-sm border-2 border-white"
         onsubmit="return validateForm()">
         <h2 class="text-2xl text-white text-center font-bold mb-4">Register Yourself</h2>
 
-        <!-- PHP SESSION ERROR MESSAGE -->
+
         <?php
         session_start();
         if (isset($_SESSION['error'])) {
             echo '<p class="text-red-500 text-center font-semibold bg-red-200 p-2 rounded mb-4">' . $_SESSION['error'] . '</p>';
-            unset($_SESSION['error']); // Clear the error after displaying
+            unset($_SESSION['error']);
         }
         ?>
 
@@ -26,28 +26,28 @@
 
         <div class="mb-4">
             <label class="text-white text-sm font-bold mb-2 ml-4" for="username">Username</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="username" name="username"
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none" id="username" name="username"
                 type="text" placeholder="Enter your username">
             <p id="userNameError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 
         <div class="mb-4">
             <label class="text-white text-sm font-bold mb-2 ml-4" for="email">Email</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="email" name="email"
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none" id="email" name="email"
                 type="email" placeholder="Enter your email">
             <p id="emailError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 
         <div class="mb-4">
             <label class="text-white text-sm font-bold mb-2 ml-4" for="password">Password</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="password" name="password"
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none" id="password" name="password"
                 type="password" placeholder="Enter your password">
             <p id="passwordError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 
         <div class="mb-4">
             <label class="text-white text-sm font-bold mb-2 ml-4" for="confirmPassword">Confirm Password</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" name="confirmPassword"
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none" name="confirmPassword"
                 id="confirmPassword" type="password" placeholder="Enter your password again">
             <p id="confirmPasswordError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
@@ -75,7 +75,6 @@
             let userNameError = document.getElementById("userNameError");
             let isValid = true;
 
-            // Reset error messages
             emailError.innerText = "";
             emailError.classList.add("hidden");
             passwordError.innerText = "";
@@ -85,7 +84,6 @@
             userNameError.innerText = "";
             userNameError.classList.add("hidden");
 
-            // Email validation
             if (email === "") {
                 emailError.innerText = "Email is required!";
                 emailError.classList.remove("hidden");
@@ -96,7 +94,7 @@
                 isValid = false;
             }
 
-            // Password validation
+            
             if (password === "") {
                 passwordError.innerText = "Password is required!";
                 passwordError.classList.remove("hidden");
@@ -107,7 +105,6 @@
                 isValid = false;
             }
 
-            // Confirm Password validation
             if (confirmPassword === "") {
                 confirmPasswordError.innerText = "Confirm password is required!";
                 confirmPasswordError.classList.remove("hidden");
@@ -118,7 +115,7 @@
                 isValid = false;
             }
 
-            // Username validation
+            
             if (userName === "") {
                 userNameError.innerText = "Username is required!";
                 userNameError.classList.remove("hidden");

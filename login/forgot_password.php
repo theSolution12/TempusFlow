@@ -24,7 +24,7 @@
 
         <div class="mb-4">
             <label class="text-white text-sm font-bold mb-2 ml-4" for="email">Email</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="email" name="email" type="email" placeholder="Enter your email">
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none" id="email" name="email" type="email" placeholder="Enter your email">
             <p id="emailError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 

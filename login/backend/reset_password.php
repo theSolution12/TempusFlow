@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-$serverName = "localhost"; // Add this line
+$serverName = "localhost"; 
 $userName = "root";
 $password = "";
 $dbName = "notesdb";
 
-// Database Connection
+
 $conn = mysqli_connect($serverName, $userName, $password, $dbName);
 
 if (!$conn) {
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $token = $_POST['token'];
     $password = $_POST['password'];
 
-    // Validate token and check expiry
+    
     $query = "SELECT email FROM users WHERE reset_token = '$token' AND token_expiry > NOW()";
     $result = mysqli_query($conn, $query);
 
@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = mysqli_fetch_assoc($result);
         $email = $row['email'];
 
-        // Hash the new password
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Update password and clear reset token
+        
         $updateQuery = "UPDATE users SET password = '$hashedPassword', reset_token = NULL, token_expiry = NULL WHERE email = '$email'";
         if (mysqli_query($conn, $updateQuery)) {
             $_SESSION['success'] = "Password reset successfully! Please log in.";

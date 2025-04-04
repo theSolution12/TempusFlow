@@ -17,18 +17,6 @@ mysqli_select_db($conn, "notesdb");
 $email = trim($_POST['email']);
 $pass = trim($_POST['password']);
 
-if (empty($email) || empty($pass)) {
-    $_SESSION['error'] = "All fields are required!";
-    header("location: ../login.php");
-    exit();
-}
-
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $_SESSION['error'] = "Invalid email format!";
-    header("location: ../login.php");
-    exit();
-}
-
 $checkQuery = mysqli_prepare($conn, "SELECT id, username, email, password FROM users WHERE email = ?");
 mysqli_stmt_bind_param($checkQuery, "s", $email);
 mysqli_stmt_execute($checkQuery);
@@ -43,9 +31,9 @@ if (mysqli_num_rows($checkResult) == 0) {
     $hashedPass = $row['password'];
 
     if (password_verify($pass, $hashedPass)) {
-        $_SESSION['error'] = ""; // Clear error on successful login
-        $_SESSION['user_id'] = $row['id']; // Set user_id in session
-        $_SESSION['username'] = $row['username']; // Set username in session
+        $_SESSION['error'] = ""; 
+        $_SESSION['user_id'] = $row['id']; 
+        $_SESSION['username'] = $row['username']; 
         header("location: ../../main/display.php");
         exit();
     } else {

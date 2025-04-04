@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Login</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
 </head>
@@ -16,23 +16,23 @@
         <?php
             if (isset($_SESSION['error'])) {
                 echo '<p class="text-red-500 text-center font-semibold bg-red-200 p-2 rounded mb-4">' . $_SESSION['error'] . '</p>';
-                unset($_SESSION['error']); // Clear the error after displaying
+                unset($_SESSION['error']);
             }
             else if (isset($_SESSION['success'])){
                 echo '<p class="text-green-500 text-center font-semibold bg-green-200 p-2 rounded mb-4">' . $_SESSION['success'] . '</p>';
-                unset($_SESSION['success']); // Clear the success message after displaying
+                unset($_SESSION['success']);
             }
         ?>
 
         <div class="mb-4">
             <label class="text-white text-sm font-bold mb-2 ml-4" for="email">Email</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="email" name="email" type="email" placeholder="Enter your email">
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white focus:border-white focus:ring-white focus:outline-none" id="email" name="email" type="email" placeholder="Enter your email">
             <p id="emailError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
 
         <div class="mb-4">
             <label class="text-white text-sm font-bold mb-2 ml-4" for="password">Password</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white" id="password" name="password" type="password" placeholder="Enter your password">
+            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none" id="password" name="password" type="password" placeholder="Enter your password">
             <p id="passwordError" class="text-red-500 text-sm mt-1 hidden"></p>
         </div>
         
@@ -54,13 +54,13 @@
             let passwordError = document.getElementById("passwordError");
             let isValid = true;
 
-            // Reset errors
+            
             emailError.innerText = "";
             emailError.classList.add("hidden");
             passwordError.innerText = "";
             passwordError.classList.add("hidden");
 
-            // Email validation
+            
             if (email === "") {
                 emailError.innerText = "Email is required!";
                 emailError.classList.remove("hidden");
@@ -71,7 +71,7 @@
                 isValid = false;
             }
 
-            // Password validation
+            
             if (password === "") {
                 passwordError.innerText = "Password is required!";
                 passwordError.classList.remove("hidden");
