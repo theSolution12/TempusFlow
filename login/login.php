@@ -2,88 +2,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="" />
+  <style>
+    .cardImage {
+      background-image: url('../assets/login-bg.png');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 </head>
-<body class="bg-[url(../assets/login-bg.png)] bg-cover bg-center h-screen flex items-center justify-center">
-    <form action="./backend/login.php" method="post" class="backdrop-blur-lg p-6 rounded-xl shadow-md w-full max-w-sm border-2 border-white" onsubmit="return validateForm()">
-        <h2 class="text-2xl text-white text-center font-bold mb-4">Login Form</h2>
+<body class="w-screen h-screen flex items-center justify-center">
 
-        
+  <!-- Centered Card -->
+  <div class="w-full max-w-4xl h-5/6 bg-white shadow-lg rounded-lg overflow-hidden flex">
+    
+    <!-- Left 50% - Image -->
+    <div class="w-1/2 cardImage"></div>
+
+    <!-- Right 50% - Login Form -->
+    <div class="w-1/2 flex items-center justify-center p-8 bg-gray-100">
+      <form action="./backend/login.php" method="post" class="w-full max-w-sm" onsubmit="return validateForm()">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+
         <?php
-            if (isset($_SESSION['error'])) {
-                echo '<p class="text-red-500 text-center font-semibold bg-red-200 p-2 rounded mb-4">' . $_SESSION['error'] . '</p>';
-                unset($_SESSION['error']);
-            }
-            else if (isset($_SESSION['success'])){
-                echo '<p class="text-green-500 text-center font-semibold bg-green-200 p-2 rounded mb-4">' . $_SESSION['success'] . '</p>';
-                unset($_SESSION['success']);
-            }
+          if (isset($_SESSION['error'])) {
+              echo '<p class="text-red-500 text-center font-semibold bg-red-200 p-2 rounded mb-4">' . $_SESSION['error'] . '</p>';
+              unset($_SESSION['error']);
+          } else if (isset($_SESSION['success'])) {
+              echo '<p class="text-green-500 text-center font-semibold bg-green-200 p-2 rounded mb-4">' . $_SESSION['success'] . '</p>';
+              unset($_SESSION['success']);
+          }
         ?>
 
         <div class="mb-4">
-            <label class="text-white text-sm font-bold mb-2 ml-4" for="email">Email</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white focus:border-white focus:ring-white focus:outline-none" id="email" name="email" type="email" placeholder="Enter your email">
-            <p id="emailError" class="text-red-500 text-sm mt-1 hidden"></p>
+          <label class="block text-gray-700 mb-2" for="email">Email</label>
+          <input class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" type="email" id="email" name="email" placeholder="you@example.com" required />
+          <span id="emailError" class="text-red-500 text-sm hidden"></span>
         </div>
 
-        <div class="mb-4">
-            <label class="text-white text-sm font-bold mb-2 ml-4" for="password">Password</label>
-            <input class="shadow border-2 rounded-full w-full py-3 px-3 text-white text-sm bg-transparent border-white placeholder:text-white  focus:border-white focus:ring-white focus:outline-none" id="password" name="password" type="password" placeholder="Enter your password">
-            <p id="passwordError" class="text-red-500 text-sm mt-1 hidden"></p>
-        </div>
-        
-        <div class="mb-4 flex items-center justify-between px-2">
-            <a href="register.php" class="text-white text-sm hover:underline">Register</a>
-            <a href="forgot_password.php" class="text-white text-sm hover:underline">Forgot Password</a>
+        <div class="mb-6">
+          <label class="block text-gray-700 mb-2" for="password">Password</label>
+          <input class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" id="password" name="password" placeholder="••••••••" required />
+          <span id="passwordError" class="text-red-500 text-sm hidden"></span>
         </div>
 
-        <div class="w-full flex items-center justify-center">
-            <input class="bg-white hover:bg-gray-200 font-semibold py-3 px-3 w-full rounded-full cursor-pointer" type="submit" value="Submit">
+        <div class="mb-4 flex items-center justify-between text-sm">
+          <a href="register.php" class="text-blue-600 hover:underline">Register</a>
+          <a href="forgot_password.php" class="text-blue-600 hover:underline">Forgot Password?</a>
         </div>
-    </form>
 
-    <script>
-        function validateForm() {
-            let email = document.getElementById("email").value.trim();
-            let password = document.getElementById("password").value.trim();
-            let emailError = document.getElementById("emailError");
-            let passwordError = document.getElementById("passwordError");
-            let isValid = true;
+        <input type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition cursor-pointer" value="Submit" />
+      </form>
+    </div>
 
-            
-            emailError.innerText = "";
-            emailError.classList.add("hidden");
-            passwordError.innerText = "";
-            passwordError.classList.add("hidden");
+  </div>
 
-            
-            if (email === "") {
-                emailError.innerText = "Email is required!";
-                emailError.classList.remove("hidden");
-                isValid = false;
-            } else if (!email.match(/^\S+@\S+\.\S+$/)) {
-                emailError.innerText = "Invalid email format!";
-                emailError.classList.remove("hidden");
-                isValid = false;
-            }
+  <script>
+    function validateForm() {
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+      let emailError = document.getElementById("emailError");
+      let passwordError = document.getElementById("passwordError");
+      let isValid = true;
 
-            
-            if (password === "") {
-                passwordError.innerText = "Password is required!";
-                passwordError.classList.remove("hidden");
-                isValid = false;
-            } else if (password.length < 6) {
-                passwordError.innerText = "Password must be at least 6 characters!";
-                passwordError.classList.remove("hidden");
-                isValid = false;
-            }
+      emailError.innerText = "";
+      emailError.classList.add("hidden");
+      passwordError.innerText = "";
+      passwordError.classList.add("hidden");
 
-            return isValid;
-        }
-    </script>
+      if (email === "") {
+        emailError.innerText = "Email is required!";
+        emailError.classList.remove("hidden");
+        isValid = false;
+      } else if (!email.match(/^\S+@\S+\.\S+$/)) {
+        emailError.innerText = "Invalid email format!";
+        emailError.classList.remove("hidden");
+        isValid = false;
+      }
+
+      if (password === "") {
+        passwordError.innerText = "Password is required!";
+        passwordError.classList.remove("hidden");
+        isValid = false;
+      } else if (password.length < 6) {
+        passwordError.innerText = "Password must be at least 6 characters!";
+        passwordError.classList.remove("hidden");
+        isValid = false;
+      }
+
+      return isValid;
+    }
+  </script>
 </body>
 </html>

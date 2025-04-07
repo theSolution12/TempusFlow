@@ -36,13 +36,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $updateQuery = "UPDATE users SET password = '$hashedPassword', reset_token = NULL, token_expiry = NULL WHERE email = '$email'";
         if (mysqli_query($conn, $updateQuery)) {
             $_SESSION['success'] = "Password reset successfully! Please log in.";
+            unset($_SESSION['error']);
             header("location: ../login.php");
             exit();
         } else {
             $_SESSION['error'] = "Failed to reset password. Try again.";
+            unset($_SESSION['success']);
         }
     } else {
         $_SESSION['error'] = "Invalid or expired token.";
+        unset($_SESSION['success']);
     }
 }
 

@@ -65,14 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
                 $mail->send();
                 $_SESSION['success'] = "Password reset link has been sent!";
+                unset($_SESSION['error']);
             } catch (Exception $e) {
                 $_SESSION['error'] = "Mailer Error: " . $mail->ErrorInfo;
+                unset($_SESSION['success']);
             }
         } else {
             $_SESSION['error'] = "Failed to generate reset token.";
+            unset($_SESSION['success']);
         }
     } else {
         $_SESSION['error'] = "No account found with that email.";
+        unset($_SESSION['success']);
     }
 
     header("location: ../forgot_password.php");

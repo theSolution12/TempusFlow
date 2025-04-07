@@ -28,6 +28,7 @@ $checkResult = mysqli_stmt_get_result($checkQuery);
 
 if (mysqli_num_rows($checkResult) > 0) {
     $_SESSION['error'] = "Email already exists!";
+    unset($_SESSION['success']);
     header("location: ../register.php");
     exit();
 }
@@ -39,6 +40,7 @@ $result = mysqli_stmt_execute($query);
 
 if ($result) {
     $_SESSION['success'] = "Account created successfully!";
+    unset($_SESSION['error']);
     header("location: ../login.php");
     exit();
 } else {
