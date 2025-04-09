@@ -8,6 +8,19 @@ require 'PHPMailer/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+function loadEnv($path) {
+    if (!file_exists($path)) return;
+  
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0 || !strpos($line, '=')) continue;
+        list($name, $value) = explode('=', $line, 2);
+        putenv(trim($name) . '=' . trim($value));
+    }
+}
+  
+loadEnv('../../.env');
+
 $serverName = "localhost";
 $userName = "root";
 $password = "";
@@ -50,12 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'parthpatidar127@gmail.com';
-                $mail->Password = 'shap werl dvcy llpf';
+                $mail->Username = getenv('EMAIL_USERNAME');
+                $mail->Password = getenv('EMAIL_PASSWORD');
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
             
-                $mail->setFrom('parthpatidar127@gmail.com', 'Your Website');
+                $mail->setFrom('parthpatidar127@gmail.com', 'TempusFlow');
                 $mail->addAddress($email);
                 $mail->Subject = "Password Reset Request";
                 $mail->Body = "Click the link below to reset your password:\n$resetLink";

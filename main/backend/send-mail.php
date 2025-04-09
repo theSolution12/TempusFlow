@@ -1,29 +1,60 @@
 <?php
 session_start();
 
+require '../../login/backend/PHPMailer/src/PHPMailer.php';
+require '../../login/backend/PHPMailer/src/Exception.php';
+require '../../login/backend/PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+function loadEnv($path) {
+  if (!file_exists($path)) return;
+
+  $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  foreach ($lines as $line) {
+      if (strpos(trim($line), '#') === 0 || !strpos($line, '=')) continue;
+      list($name, $value) = explode('=', $line, 2);
+      putenv(trim($name) . '=' . trim($value));
+  }
+}
+
+loadEnv('../../.env');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = htmlspecialchars($_POST["name"]);
   $email = htmlspecialchars($_POST["email"]);
   $message = htmlspecialchars($_POST["message"]);
 
-  // Email destination
-  $to = "parthpatidar127@gmail.com";
-  $subject = "New Contact Form Message from $name";
+  $mail = new PHPMailer(true);
 
-  $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
-  $headers = "From: $email" . "\r\n" .
-             "Reply-To: $email" . "\r\n";
+  try {
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = getenv('EMAIL_USERNAME');
+    $mail->Password = getenv('EMAIL_PASSWORD');
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
 
-  if (mail($to, $subject, $body, $headers)) {
-    $_SESSION["success"] = "Message sent successfully!";
-    header("Location: ../contact.php"); // Redirect to the contact page or a thank you page
-  } else {
-    $_SESSION["error"] = "Failed to send message. Please try again later.";
-    header("Location: ../contact.php"); // Redirect back to the contact page
+    $mail->setFrom('parthpatidar127@gmail.com', 'TempusFlow');
+    $mail->addAddress('parthpatidar127@gmail.com', 'Admin');
+    $mail->Subject = "New contact request from $email";
+    $mail->Body = "$message\n\nFrom: $name\nEmail: $email";
+    $mail->isHTML(true);
+
+    $mail->send();
+    $_SESSION['success'] = "Contact form submitted successfully!";
+    header("Location: ../contact.php");
+    unset($_SESSION['error']);
+  } catch (Exception $e) {
+    $_SESSION["error"] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    header("Location: ../contact.php");
   }
 } else {
-    $_SESSION["error"] = "Invalid request method.";
-    header("Location: ../contact.php"); // Redirect back to the contact page
+  $_SESSION["error"] = "Invalid request method.";
+  header("Location: ../contact.php");
 }
 ?>
