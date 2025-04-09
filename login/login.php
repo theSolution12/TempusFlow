@@ -17,13 +17,10 @@
 </head>
 <body class="w-screen h-screen flex items-center justify-center">
 
-  <!-- Centered Card -->
   <div class="w-full max-w-4xl h-5/6 bg-white shadow-lg rounded-lg overflow-hidden flex">
     
-    <!-- Left 50% - Image -->
     <div class="w-1/2 cardImage"></div>
 
-    <!-- Right 50% - Login Form -->
     <div class="w-1/2 flex items-center justify-center p-8 bg-gray-100">
       <form action="./backend/login.php" method="post" class="w-full max-w-sm" onsubmit="return validateForm()">
         <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>

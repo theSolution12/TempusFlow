@@ -13,7 +13,6 @@ $userName = "root";
 $password = "";
 $dbName = "notesdb";
 
-// Database Connection
 $conn = mysqli_connect($serverName, $userName, $password, $dbName);
 
 if (!$conn) {
@@ -22,11 +21,9 @@ if (!$conn) {
     exit();
 }
 
-// Handle POST Request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     
-    // Check if email exists
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $query);
 
@@ -37,17 +34,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (mysqli_num_rows($result) > 0) {
-        // Generate secure reset token
+       
         $token = bin2hex(random_bytes(50));
 
-        // Update user record with reset token and expiry time
+        
         $updateQuery = "UPDATE users SET reset_token = '$token', token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE email = '$email'";
 
         if (mysqli_query($conn, $updateQuery)) {
-            // Construct reset link
+            
             $resetLink = "http://localhost/int220/login/reset_password.php?token=$token";
 
-            // Email content
+            
             $mail = new PHPMailer(true);
             try {
                 $mail->isSMTP();
