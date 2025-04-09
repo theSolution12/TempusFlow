@@ -160,7 +160,7 @@ $conn->close();
 
 if ($is_direct_access) {
     echo "<br>Database setup completed successfully!";
-    header("Location: ../login/login.php");
+    header("Location: ../main/main.php");
     exit();
 }
 
