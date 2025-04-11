@@ -19,7 +19,12 @@
 
   <div class="w-full max-w-4xl h-5/6 bg-white shadow-lg rounded-lg overflow-hidden flex">
     
-    <div class="w-1/2 cardImage"></div>
+  <div class="w-1/2 cardImage flex items-center justify-center">
+  <div class="bg-black/40 w-full h-full flex items-center justify-center">
+    <img src="../assets/LOGO.png" width="400px" alt="" class="object-contain" />
+  </div>
+</div>
+
 
     <div class="w-1/2 flex items-center justify-center p-8 bg-gray-100">
       <form action="./backend/login.php" method="post" class="w-full max-w-sm" onsubmit="return validateForm()">

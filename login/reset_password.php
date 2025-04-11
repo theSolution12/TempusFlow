@@ -2,9 +2,9 @@
 session_start();
 
 if (!isset($_GET['token'])) {
-    $_SESSION['error'] = "Invalid reset link.";
-    header("location: ./login.php");
-    exit();
+  $_SESSION['error'] = "Invalid reset link.";
+  header("location: ./login.php");
+  exit();
 }
 
 $token = $_GET['token'];
@@ -24,11 +24,16 @@ $token = $_GET['token'];
 
   <div class="w-full max-w-4xl h-5/6 bg-white shadow-lg rounded-lg overflow-hidden flex">
 
-    <div class="w-1/2 cardImage bg-[url(../assets/login-bg.png)] bg-cover bg-center"></div>
+    <div class="w-1/2 cardImage bg-[url(../assets/login-bg.png)] bg-cover bg-center flex items-center justify-center">
+      <div class="bg-black/40 w-full h-full flex items-center justify-center">
+        <img src="../assets/LOGO.png" width="400px" alt="" class="object-contain" />
+      </div>
+    </div>
 
     <div class="w-1/2 flex items-center justify-center p-8 bg-gray-100">
-      <form action="./backend/reset_password.php" method="post" class="w-full max-w-sm" onsubmit="return validateForm()">
-        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+      <form action="./backend/reset_password.php" method="post" class="w-full max-w-sm"
+        onsubmit="return validateForm()">
+        <h2 class="text-2xl font-bold mb-6 text-center">Reset Password</h2>
 
         <?php
         if (isset($_SESSION['error'])) {
@@ -75,7 +80,7 @@ $token = $_GET['token'];
       let confirmPasswordError = document.getElementById("confirmPasswordError");
       let isValid = true;
 
-      
+
       passwordError.innerText = "";
       passwordError.classList.add("hidden");
       confirmPasswordError.innerText = "";
