@@ -38,9 +38,9 @@ session_start();
         <div>
           <?php
           if (!isset($_SESSION['user_id'])) {
-            echo '<a href="../login/login.php" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">Login</a>';
+            echo '<a href="../login/login.php" class="bg-black/20 backdrop:blur-lg text-white px-6 py-3 border border-gray-400 rounded-full hover:bg-black/30 transition duration-300">Login</a>';
           } else {
-            echo '<a href="../login/logout.php" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300">Logout</a>';
+            echo '<a href="../login/logout.php" class="bg-black/20 backdrop:blur-lg text-white px-6 py-3 border border-red-400 rounded-full hover:bg-black/30 transition duration-300">Logout</a>';
           }
           ?>
         </div>
