@@ -3,6 +3,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+function loadEnv($path) {
+    if (!file_exists($path)) return;
+  
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0 || !strpos($line, '=')) continue;
+        list($name, $value) = explode('=', $line, 2);
+        putenv(trim($name) . '=' . trim($value));
+    }
+  }
+  
+  loadEnv('../../.env');
+  
+
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Content-Type: application/json');
@@ -22,7 +36,7 @@ $title = $_POST['title'];
 // Function to generate an essay using Gemini API
 function generateEssayWithGemini($title) {
     // Your Gemini API key - you should store this in a more secure way
-    $apiKey = "AIzaSyDT642gkqTNO45h6ZP-hRufEmzGID3Sc7A"; // Replace with your actual API key
+    $apiKey = getenv("API_KEY"); // Replace with your actual API key
     
     // Gemini API endpoint
     $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey;
