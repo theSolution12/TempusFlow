@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($conn, $updateQuery)) {
             
-            $resetLink = "http://localhost/int220/login/reset_password.php?token=$token";
+            $resetLink = "http://localhost/TempusFlow/login/reset_password.php?token=$token";
 
             
             $mail = new PHPMailer(true);
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
             
-                $mail->setFrom('parthpatidar127@gmail.com', 'TempusFlow');
+                $mail->setFrom(getenv('EMAIL_USERNAME'), 'TempusFlow');
                 $mail->addAddress($email);
                 $mail->Subject = "Password Reset Request";
                 $mail->Body = "Click the link below to reset your password:\n$resetLink";

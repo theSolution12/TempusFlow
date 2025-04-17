@@ -39,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
 
-    $mail->setFrom('parthpatidar127@gmail.com', 'TempusFlow');
-    $mail->addAddress('parthpatidar127@gmail.com', 'Admin');
+    $mail->setFrom(getenv('EMAIL_USERNAME'), 'TempusFlow');
+    $mail->addAddress(getenv('EMAIL_USERNAME'), 'Admin');
     $mail->Subject = "New contact request from $email";
     $mail->Body = "$message\n\nFrom: $name\nEmail: $email";
     $mail->isHTML(true);
