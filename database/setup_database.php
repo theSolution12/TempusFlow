@@ -32,10 +32,8 @@ if ($conn->query($sql) === TRUE) {
     }
 }
 
-// Select the database
 $conn->select_db("notesdb");
 
-// Create users table if it doesn't exist
 $sql = "CREATE TABLE IF NOT EXISTS users (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
