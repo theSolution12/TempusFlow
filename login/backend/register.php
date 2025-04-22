@@ -33,6 +33,17 @@ if (mysqli_num_rows($checkResult) > 0) {
     exit();
 }
 
+$checkQuery = mysqli_prepare($conn, "SELECT email FROM users WHERE username = ?");
+mysqli_stmt_bind_param($checkQuery, "s", $userName);
+mysqli_stmt_execute($checkQuery);
+$checkResult = mysqli_stmt_get_result($checkQuery);
+
+if (mysqli_num_rows($checkResult) > 0) {
+    $_SESSION['error'] = "Username already exists!";
+    unset($_SESSION['success']);
+    header("location: ../register.php");
+    exit();
+}
 
 $query = mysqli_prepare($conn, "INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
 mysqli_stmt_bind_param($query, "sss", $userName, $email, $hashedPass);

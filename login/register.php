@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -140,8 +144,8 @@
         usernameError.innerText = "Username must be at least 3 characters!";
         usernameError.classList.remove("hidden");
         isValid = false;
-      } else if (!username.match(/^[a-zA-Z ]+$/)) {
-        usernameError.innerText = "Username can only contain letters!";
+      } else if (!username.match(/^[a-zA-Z0-9_]+$/)) {
+        usernameError.innerText = "Username can only contain letters, numbers and underscores!";
         usernameError.classList.remove("hidden");
         isValid = false;
       }
