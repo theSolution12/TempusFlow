@@ -37,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         $updateQuery = mysqli_prepare($conn, "UPDATE users SET password = ?, reset_token = NULL, token_expiry = NULL WHERE email = ?");
         mysqli_stmt_bind_param($updateQuery, "ss", $hashedPassword, $email);
-        mysqli_stmt_execute($updateQuery);
-        $updateResult = mysqli_stmt_get_result($updateQuery);
-        if ($updateResult) {
+        
+        
+        if (mysqli_stmt_execute($updateQuery)) {
             $_SESSION['success'] = "Password reset successfully! Please log in.";
             unset($_SESSION['error']);
             header("location: ../login.php");
