@@ -22,8 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     
-    $query = "SELECT email FROM users WHERE reset_token = '$token' AND token_expiry > NOW()";
-    $result = mysqli_query($conn, $query);
+    $query = mysqli_prepare($conn, "SELECT email FROM users WHERE reset_token = ? AND token_expiry > NOW()");
+    mysqli_stmt_bind_param($query, "s", $token);
+    mysqli_stmt_execute($query);
+    $result = mysqli_stmt_get_result($query);
 
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -33,8 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         
-        $updateQuery = "UPDATE users SET password = '$hashedPassword', reset_token = NULL, token_expiry = NULL WHERE email = '$email'";
-        if (mysqli_query($conn, $updateQuery)) {
+        $updateQuery = mysqli_prepare($conn, "UPDATE users SET password = ?, reset_token = NULL, token_expiry = NULL WHERE email = ?");
+        mysqli_stmt_bind_param($updateQuery, "ss", $hashedPassword, $email);
+        mysqli_stmt_execute($updateQuery);
+        $updateResult = mysqli_stmt_get_result($updateQuery);
+        if ($updateResult) {
             $_SESSION['success'] = "Password reset successfully! Please log in.";
             unset($_SESSION['error']);
             header("location: ../login.php");
