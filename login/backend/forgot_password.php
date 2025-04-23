@@ -53,9 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $token = bin2hex(random_bytes(50));
 
         
-        $updateQuery = "UPDATE users SET reset_token = '$token', token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE email = '$email'";
+        $updateQuery = mysqli_prepare($conn, "UPDATE users SET reset_token = ?, token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE email = ?");
+        mysqli_stmt_bind_param($updateQuery, "ss", $token, $email);
+        
 
-        if (mysqli_query($conn, $updateQuery)) {
+        if (mysqli_stmt_execute($updateQuery)) {
             
             $resetLink = "http://localhost/TempusFlow/login/reset_password.php?token=$token";
 
