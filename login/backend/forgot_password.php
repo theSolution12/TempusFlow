@@ -37,8 +37,10 @@ if (!$conn) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     
-    $query = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
+    $query = mysqli_prepare($conn, "SELECT id FROM users WHERE email = ?");
+    mysqli_stmt_bind_param($query, "s", $email);
+    mysqli_stmt_execute($query);
+    $result = mysqli_stmt_get_result($query);
 
     if (!$result) {
         $_SESSION['error'] = "Database error: " . mysqli_error($conn);
