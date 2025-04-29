@@ -96,8 +96,8 @@
         passwordError.innerText = "Password is required!";
         passwordError.classList.remove("hidden");
         isValid = false;
-      } else if (password.length < 6) {
-        passwordError.innerText = "Password must be at least 6 characters!";
+      } else if (password.length < 8) {
+        passwordError.innerText = "Password must be at least 8 characters!";
         passwordError.classList.remove("hidden");
         isValid = false;
       }
