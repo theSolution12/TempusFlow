@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_stmt_get_result($query);
 
     if (!$result) {
-        $_SESSION['error'] = "Database error: " . mysqli_error($conn);
+        $_SESSION['error'] = "No user found with that email.";
         header("location: ../forgot_password.php");
         exit();
     }
